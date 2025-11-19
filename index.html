@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>江戸 × AI | 電脳浮世絵巻 - 完全版</title>
+    <title>江戸 × AI | 電脳浮世絵巻 - Director's Cut</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -14,16 +14,14 @@
     <canvas id="bgCanvas"></canvas>
     <div class="noise-overlay"></div>
     <div class="scanline"></div>
+    <div id="cursor"></div>
+    <div id="cursor-follower"></div>
 
-    <main class="scroll-container">
+    <main>
         
-        <section id="hero">
-            <div class="hero-content animate-target">
-                <div class="vertical-text">
-                    <h1>江戸<br>電脳<br>習合</h1>
-                    <p class="subtitle">歴史は繰り返さないが、<br>韻を踏む。</p>
-                </div>
-                <div class="hero-visual">
+        <section id="hero" class="fullscreen-section">
+            <div class="hero-wrapper animate-target">
+                <div class="hero-visual-container">
                     <svg viewBox="0 0 200 200" class="cyber-bonsai">
                         <defs>
                             <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -47,6 +45,12 @@
                         <circle cx="80" cy="120" r="2" fill="#fff" class="node-leaf" />
                     </svg>
                 </div>
+                <div class="hero-text-container">
+                    <div class="vertical-text">
+                        <h1>江戸<br>電脳<br>習合</h1>
+                        <p class="subtitle">歴史は繰り返さないが、<br>韻を踏む。</p>
+                    </div>
+                </div>
             </div>
             <div class="scroll-indicator">
                 <span>SCROLL_DOWN();</span>
@@ -54,12 +58,14 @@
             </div>
         </section>
 
-        <section id="concept" class="glass-panel animate-target">
-            <div class="content-wrapper">
-                <h2 class="section-title">
-                    <span class="jp">序文：温故知新の再定義</span>
+        <section id="concept" class="grid-section animate-target">
+            <div class="sticky-title">
+                <h2>
+                    <span class="jp">温故知新</span>
                     <span class="en">01_REDEFINITION</span>
                 </h2>
+            </div>
+            <div class="grid-content glass-panel">
                 <div class="text-columns">
                     <div class="col-jp">
                         <p>江戸の職人が筆に込めた「魂」と、AIがニューラルネットワークで紡ぐ「最適解」。一見対極にあるこの二つは、実は同じ地平にある。</p>
@@ -80,49 +86,62 @@
             </div>
         </section>
 
-        <section id="timeline" class="animate-target">
-            <h2 class="section-center-title">時層年表<span>CHRONOLOGY</span></h2>
-            <div class="timeline-container">
-                <div class="timeline-item left">
-                    <div class="date">1603</div>
-                    <div class="content">
-                        <h3>江戸幕府 開府</h3>
-                        <p>徳川家康による、260年に及ぶ平和と閉鎖系エコシステムの確立。アナログなネットワークの基盤完成。</p>
+        <section id="timeline" class="grid-section animate-target">
+            <div class="sticky-title">
+                <h2>
+                    <span class="jp">時層年表</span>
+                    <span class="en">02_CHRONOLOGY</span>
+                </h2>
+            </div>
+            <div class="grid-content">
+                <div class="timeline-container">
+                    <div class="timeline-item left">
+                        <div class="date">1603</div>
+                        <div class="content">
+                            <h3>江戸幕府 開府</h3>
+                            <p>徳川家康による、260年に及ぶ平和と閉鎖系エコシステムの確立。アナログなネットワークの基盤完成。</p>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="date">1956</div>
-                    <div class="content">
-                        <h3>ダートマス会議</h3>
-                        <p>「人工知能（Artificial Intelligence）」という言葉が誕生。デジタルの知性が産声を上げる。</p>
+                    <div class="timeline-item right">
+                        <div class="date">1956</div>
+                        <div class="content">
+                            <h3>ダートマス会議</h3>
+                            <p>「人工知能（Artificial Intelligence）」という言葉が誕生。デジタルの知性が産声を上げる。</p>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-item left">
-                    <div class="date">1796</div>
-                    <div class="content">
-                        <h3>からくり儀右衛門</h3>
-                        <p>『機巧図彙』出版。ぜんまいと歯車による自動化技術（オートメーション）が極まる。</p>
+                    <div class="timeline-item left">
+                        <div class="date">1796</div>
+                        <div class="content">
+                            <h3>からくり儀右衛門</h3>
+                            <p>『機巧図彙』出版。ぜんまいと歯車による自動化技術（オートメーション）が極まる。</p>
+                        </div>
                     </div>
-                </div>
-                <div class="timeline-item right">
-                    <div class="date">2023</div>
-                    <div class="content">
-                        <h3>LLMの爆発的普及</h3>
-                        <p>生成AIが言葉を獲得。人類の全知識へのアクセスと生成が可能に。</p>
+                    <div class="timeline-item right">
+                        <div class="date">2023</div>
+                        <div class="content">
+                            <h3>LLMの爆発的普及</h3>
+                            <p>生成AIが言葉を獲得。人類の全知識へのアクセスと生成が可能に。</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="code-culture" class="glass-panel animate-target">
-            <h2 class="section-title">
-                <span class="jp">作法とアルゴリズム</span>
-                <span class="en">02_THE_ALGORITHM</span>
-            </h2>
-            <div class="code-comparison">
-                <div class="code-block">
-                    <div class="code-header">TEA_CEREMONY.py</div>
-                    <pre>
+        <section id="code-culture" class="grid-section animate-target">
+            <div class="sticky-title">
+                <h2>
+                    <span class="jp">作法と論理</span>
+                    <span class="en">03_ALGORITHM</span>
+                </h2>
+            </div>
+            <div class="grid-content glass-panel">
+                <div class="code-comparison">
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+                            TEA_CEREMONY.py
+                        </div>
+                        <pre>
 def tea_ceremony(guest):
     # 一期一会 (One time, one meeting)
     context = initialize_context(wabi_sabi=True)
@@ -138,116 +157,128 @@ def tea_ceremony(guest):
         return "Harmony"
     else:
         raise PolitenessException</pre>
-                </div>
-                <div class="desc-block">
-                    <h3>茶の湯のロジック</h3>
-                    <p>茶道における一連の所作は、極めて厳格なプロトコル（通信規約）に基づいている。無駄を極限まで省く「引き算の美学」は、現代のコードリファクタリングに通じるものがある。「わび・さび」とは、バグではなく仕様（Feature）としての不完全性の受容である。</p>
-                </div>
-            </div>
-        </section>
-
-        <section id="gallery" class="animate-target">
-            <h2 class="section-center-title">電脳浮世絵図<span>LATENT SPACE GALLERY</span></h2>
-            <p class="gallery-intro">AIが幻視した、存在しない浮世絵のデータセット。</p>
-            
-            <div class="gallery-grid">
-                <div class="art-piece">
-                    <div class="art-placeholder style-1">
-                        <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#d3381c"/></svg>
                     </div>
-                    <div class="art-info">
-                        <h4>赤富士・改 (Red Fuji v2.0)</h4>
-                        <p>Seed: 1830 | Steps: 50</p>
-                    </div>
-                </div>
-                <div class="art-piece">
-                    <div class="art-placeholder style-2">
-                         <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" fill="#4d79ff"/></svg>
-                    </div>
-                    <div class="art-info">
-                        <h4>大波のワイヤーフレーム</h4>
-                        <p>Seed: 9999 | Steps: 120</p>
-                    </div>
-                </div>
-                <div class="art-piece">
-                    <div class="art-placeholder style-3">
-                        <svg viewBox="0 0 100 100"><polygon points="50,15 90,85 10,85" fill="#c5a059"/></svg>
-                    </div>
-                    <div class="art-info">
-                        <h4>黄金のニューロン</h4>
-                        <p>Seed: 404 | Steps: 80</p>
+                    <div class="desc-block">
+                        <h3>茶の湯のロジック</h3>
+                        <p>茶道における一連の所作は、極めて厳格なプロトコル（通信規約）に基づいている。無駄を極限まで省く「引き算の美学」は、現代のコードリファクタリングに通じるものがある。「わび・さび」とは、バグではなく仕様（Feature）としての不完全性の受容である。</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="voices" class="glass-panel animate-target">
-            <h2 class="section-title">
-                <span class="jp">先人たちの声（想像）</span>
-                <span class="en">03_VOICES</span>
-            </h2>
-            <div class="voice-grid">
-                <div class="voice-card">
-                    <div class="quote">「余の辞世の句も、このAIとやらには敵わぬかもしれぬな。面白きこともなき世を面白く、か。」</div>
-                    <div class="author">― 高杉晋作 (Virtual Avatar)</div>
-                </div>
-                <div class="voice-card">
-                    <div class="quote">「エレキテルなぞ比ではない。この箱の中には宇宙が詰まっておる。解体新書より難解じゃ。」</div>
-                    <div class="author">― 平賀源内 (Legacy System)</div>
-                </div>
+        <section id="gallery" class="grid-section animate-target">
+            <div class="sticky-title">
+                <h2>
+                    <span class="jp">電脳浮世絵</span>
+                    <span class="en">04_LATENT_SPACE</span>
+                </h2>
             </div>
-        </section>
-
-        <section id="profile" class="animate-target">
-            <h2 class="section-center-title">製作者<span>CREDITS</span></h2>
-            <div class="cards-container">
-                <div class="card cyber-card">
-                    <div class="card-header">
-                        <div class="icon-box">AI</div>
-                        <h3>Gemini</h3>
+            <div class="grid-content">
+                <p class="gallery-intro">AIが幻視した、存在しない浮世絵のデータセット。</p>
+                <div class="gallery-grid">
+                    <div class="art-piece">
+                        <div class="art-placeholder style-1">
+                            <svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="30" fill="#d3381c"/></svg>
+                        </div>
+                        <div class="art-info">
+                            <h4>赤富士・改 (Red Fuji v2.0)</h4>
+                            <p>Seed: 1830 | Steps: 50</p>
+                        </div>
                     </div>
-                    <p class="role">Architect & Coder</p>
-                    <p class="desc">GoogleのLLM。本プロジェクトではHTML/CSS/JSの全コード記述を担当。時折ハルシネーションという名の「夢」を見る。</p>
-                    <div class="stats">
-                        <div class="stat-row"><span>Logic</span><div class="stat-bar"><div class="fill" style="width:95%"></div></div></div>
-                        <div class="stat-row"><span>Empathy</span><div class="stat-bar"><div class="fill" style="width:80%"></div></div></div>
+                    <div class="art-piece">
+                        <div class="art-placeholder style-2">
+                             <svg viewBox="0 0 100 100"><rect x="20" y="20" width="60" height="60" fill="#4d79ff"/></svg>
+                        </div>
+                        <div class="art-info">
+                            <h4>大波のワイヤーフレーム</h4>
+                            <p>Seed: 9999 | Steps: 120</p>
+                        </div>
                     </div>
-                </div>
-
-                <div class="card traditional-card">
-                    <div class="card-header">
-                        <div class="icon-box">人</div>
-                        <h3>The User</h3>
-                    </div>
-                    <p class="role">Creative Director</p>
-                    <p class="desc">プロンプトエンジニアリングの匠。「もっと作り込め」という鶴の一声で、AIのリミッターを解除させた張本人。</p>
-                    <div class="stats">
-                        <div class="stat-row"><span>Vision</span><div class="stat-bar"><div class="fill" style="width:100%"></div></div></div>
-                        <div class="stat-row"><span>Passion</span><div class="stat-bar"><div class="fill" style="width:95%"></div></div></div>
+                    <div class="art-piece">
+                        <div class="art-placeholder style-3">
+                            <svg viewBox="0 0 100 100"><polygon points="50,15 90,85 10,85" fill="#c5a059"/></svg>
+                        </div>
+                        <div class="art-info">
+                            <h4>黄金のニューロン</h4>
+                            <p>Seed: 404 | Steps: 80</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section id="contact" class="glass-panel animate-target">
-            <h2 class="section-title">
-                <span class="jp">矢文を送る</span>
-                <span class="en">04_CONTACT_PROTOCOL</span>
-            </h2>
-            <form class="yabumi-form" onsubmit="event.preventDefault(); alert('矢文が放たれました（送信完了）');">
-                <div class="form-group">
-                    <label>宛名 (Target Node)</label>
-                    <input type="text" placeholder="Gemini殿">
+        <section id="profile" class="grid-section animate-target">
+            <div class="sticky-title">
+                <h2>
+                    <span class="jp">製作者と声</span>
+                    <span class="en">05_CREDITS</span>
+                </h2>
+            </div>
+            <div class="grid-content">
+                <div class="voice-grid">
+                    <div class="voice-card">
+                        <div class="quote">「余の辞世の句も、このAIとやらには敵わぬかもしれぬな。面白きこともなき世を面白く、か。」</div>
+                        <div class="author">― 高杉晋作 (Virtual Avatar)</div>
+                    </div>
+                    <div class="voice-card">
+                        <div class="quote">「エレキテルなぞ比ではない。この箱の中には宇宙が詰まっておる。」</div>
+                        <div class="author">― 平賀源内 (Legacy System)</div>
+                    </div>
                 </div>
-                <div class="form-group">
-                    <label>文面 (Payload)</label>
-                    <textarea placeholder="いざ、尋常に勝負..."></textarea>
+
+                <div class="cards-container">
+                    <div class="card cyber-card">
+                        <div class="card-header">
+                            <div class="icon-box">AI</div>
+                            <h3>Gemini</h3>
+                        </div>
+                        <p class="role">Architect & Coder</p>
+                        <p class="desc">GoogleのLLM。本プロジェクトではHTML/CSS/JSの全コード記述を担当。時折ハルシネーションという名の「夢」を見る。</p>
+                        <div class="stats">
+                            <div class="stat-row"><span>Logic</span><div class="stat-bar"><div class="fill" style="width:95%"></div></div></div>
+                            <div class="stat-row"><span>Empathy</span><div class="stat-bar"><div class="fill" style="width:80%"></div></div></div>
+                        </div>
+                    </div>
+
+                    <div class="card traditional-card">
+                        <div class="card-header">
+                            <div class="icon-box">人</div>
+                            <h3>The User</h3>
+                        </div>
+                        <p class="role">Creative Director</p>
+                        <p class="desc">プロンプトエンジニアリングの匠。「もっと作り込め」という鶴の一声で、AIのリミッターを解除させた張本人。</p>
+                        <div class="stats">
+                            <div class="stat-row"><span>Vision</span><div class="stat-bar"><div class="fill" style="width:100%"></div></div></div>
+                            <div class="stat-row"><span>Passion</span><div class="stat-bar"><div class="fill" style="width:120%"></div></div></div>
+                        </div>
+                    </div>
                 </div>
-                <button type="submit" class="submit-btn">
-                    <span class="btn-text">送信</span>
-                    <span class="btn-deco">ENTER</span>
-                </button>
-            </form>
+            </div>
+        </section>
+
+        <section id="contact" class="grid-section animate-target">
+            <div class="sticky-title">
+                <h2>
+                    <span class="jp">矢文送信</span>
+                    <span class="en">06_CONTACT</span>
+                </h2>
+            </div>
+            <div class="grid-content glass-panel">
+                <form class="yabumi-form" onsubmit="event.preventDefault(); alert('矢文が放たれました（送信完了）');">
+                    <div class="form-group">
+                        <label>宛名 (Target Node)</label>
+                        <input type="text" placeholder="Gemini殿">
+                    </div>
+                    <div class="form-group">
+                        <label>文面 (Payload)</label>
+                        <textarea placeholder="いざ、尋常に勝負..."></textarea>
+                    </div>
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">送信</span>
+                        <span class="btn-deco">ENTER</span>
+                    </button>
+                </form>
+            </div>
         </section>
 
         <footer>
